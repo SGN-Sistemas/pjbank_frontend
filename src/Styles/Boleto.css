@@ -1,0 +1,12 @@
+.container{
+    background-color: beige;
+    padding: 10px;
+}
+
+.titulo{
+    text-align: center;
+}
+
+.label{
+    font-weight: bold;
+}
