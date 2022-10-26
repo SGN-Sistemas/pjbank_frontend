@@ -64,7 +64,7 @@ function App() {
   return (
     <div className="App">
 
-      {loading && <Loading />}
+      {loading && <Loading mensagem="Gerando boletos" />}
 
       {
         !loading && 

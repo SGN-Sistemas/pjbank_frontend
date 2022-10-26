@@ -10,7 +10,7 @@ import '../Styles/Boleto.css';
 function ConsultaBoleto() {
 
   const [loading, setLoading] = useState(true);
-  const [emitidos, setEmitidos] = useState(false);
+  const [msgVazio, setMsgVazio] = useState(false);
   const [dadosBoletos, setDadosBoletos] = useState(null);
 
   let params = useParams();
@@ -29,7 +29,15 @@ function ConsultaBoleto() {
       .then(function (response) {
 
           console.log(response.data)
-          setDadosBoletos(response.data);
+          if(response.data.length > 0){
+
+            setDadosBoletos(response.data);
+
+          }else{
+
+            setMsgVazio(true);
+          }
+          
           console.log(dadosBoletos);
 
           setLoading(false);
@@ -51,7 +59,7 @@ function ConsultaBoleto() {
   return (
     <div className="App">
 
-      {loading && <Loading />}
+      {loading && <Loading mensagem="Pesquisando boleto" />}
 
       {
         loading &&
@@ -69,10 +77,16 @@ function ConsultaBoleto() {
             <p> <span className="label">Boleto:</span> <a href={""+ dadosBoletos[0].link + ""}> {dadosBoletos[0].link} </a> </p>
             <p> <span className="label">Mais informações:</span> <a href={""+ dadosBoletos[0].link_info + ""}> {dadosBoletos[0].link_info} </a> </p>
         </div>
+        
       }
 
       {
-        emitidos ? <div><h2>Existem parcelas que já foram emitidas!</h2></div> : ''
+        msgVazio &&
+        <div className="container">
+            <h2 className="titulo">Informações do boleto</h2>
+
+            <h5>Não existe boleto de pagamento para o código informado!</h5>
+        </div>
       }
 
     </div>

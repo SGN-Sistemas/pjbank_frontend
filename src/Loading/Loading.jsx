@@ -1,5 +1,5 @@
 import React from 'react';
 
-export default function Loading(){
-        return (<h3>Gerando os boletos...</h3>)
+export default function Loading({mensagem}){
+        return (<h3>{mensagem}...</h3>)
 }

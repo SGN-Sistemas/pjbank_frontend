@@ -1,0 +1,78 @@
+
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import Loading from '../Loading/Loading';
+import { useParams } from "react-router-dom";
+import {DoubleBubble} from 'react-spinner-animated';
+import 'react-spinner-animated/dist/index.css';
+import '../Styles/Boleto.css';
+
+function ContaDigital() {
+
+  const [loading, setLoading] = useState(true);
+  const [conta, setConta] = useState(null);
+
+  let params = useParams();
+
+  let empresa = params.empresa;
+
+  const infoContaDigital = (empresa) => {
+
+    var config = {
+      method: 'GET',
+      url: `http://localhost:7000/conta?empresa=${empresa}`
+    };
+
+    axios(config)
+      .then(function (response) {
+
+          console.log(response.data)
+          setConta(response.data);
+          console.log(conta);
+
+          setLoading(false);
+
+      })
+      .catch(function (error) {
+        console.log("Problema ao tentar consultar os dados da conta!\n");
+        console.log(error);
+      });
+
+  }
+
+  useEffect(() => {
+
+    infoContaDigital(empresa);
+
+  }, []);
+
+  return (
+    <div className="App">
+
+      {
+        loading &&
+        <DoubleBubble width={"150px"} height={"150px"}></DoubleBubble>
+      }
+
+      {
+        conta &&
+        <div className="container">
+            <h2 className="titulo">Informações da conta digital PJBANK</h2>
+
+            <p> <span className="label">Empresa:</span> {conta.nome_empresa} </p>
+            <p> <span className="label">CNPJ:</span> {conta.cnpj} </p>
+            <p> <span className="label">E-mail:</span> {conta.email} </p>
+            <p> <span className="label">Agência:</span>  {conta.agencia} </p>
+            <p> <span className="label">Conta:</span>  {conta.conta} </p>
+            <p> <span className="label">Banco:</span>  {conta.banco} </p>
+            <p> <span className="label">Telefone:</span>  {conta.telefone} </p>
+            <p> <span className="label">Status:</span>  {conta.status} </p>
+            <p> <span className="label">Mensagem do status:</span>  {conta.msg_status_documentacao}  </p>
+        </div>
+      }
+
+    </div>
+  );
+}
+
+export default ContaDigital;

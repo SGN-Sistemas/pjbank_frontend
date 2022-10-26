@@ -51,7 +51,7 @@ function InvalidarBoleto() {
   return (
     <div className="App">
 
-      {loading && <Loading />}
+      {loading && <Loading mensagem="Inválidando boleto" />}
 
       {
         loading &&

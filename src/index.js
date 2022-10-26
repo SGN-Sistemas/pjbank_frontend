@@ -11,6 +11,7 @@ import {
 
 import ConsultaBoleto from './Components/ConsultaBoleto';
 import InvalidarBoleto from './Components/InvalidarBoleto';
+import ContaDigital from './Components/ContaDigital';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,6 +21,7 @@ root.render(
               <Route path="boletos/parcelas/:parcelas/" element={<App />} exact > </Route>
               <Route path="boletos/:pedido_numero/empresa/:empresa" element={<ConsultaBoleto />} exact > </Route>
               <Route path="boletos/:pedido_numero/empresa/:empresa" element={<InvalidarBoleto />} exact > </Route>
+              <Route path="conta_pjbank/empresa/:empresa" element={<ContaDigital />} exact > </Route>
         </Routes>
      </BrowserRouter>
   
