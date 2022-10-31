@@ -9,7 +9,7 @@ import '../Styles/Boleto.css';
 import Falha from '../img/falha.webp';
 import Sucesso from '../img/sucesso.webp';
 
-function ConsultaBoleto() {
+function ConsultaBoletoLote() {
 
   const [loading, setLoading] = useState(true);
   const [msgVazio, setMsgVazio] = useState(false);
@@ -19,13 +19,13 @@ function ConsultaBoleto() {
   let params = useParams();
 
   let empresa = params.empresa;
-  let pedido = params.pedido_numero;
+  let pedido = params.pedido;
 
-  const consultaPagamentoBoleto = (pedido, empresa) => {
+  const consultaPagamentoBoletoLote = (pedido, empresa) => {
 
     var config = {
       method: 'GET',
-      url: `http://localhost:7000/boleto?pedido=${pedido}&empresa=${empresa}`
+      url: `http://localhost:7000/boleto/lote?pedido=${pedido}&empresa=${empresa}`
     };
 
     axios(config)
@@ -33,14 +33,15 @@ function ConsultaBoleto() {
 
           console.log(response.data)
 
-          if(response.data.length > 0){
-
-            setDadosBoletos(response.data);
-
-          }else{
+          if(response.data.erro){
 
             setMsgVazio(true);
             setMsgErro(response.data.erro);
+
+          }else{
+
+            setDadosBoletos(response.data);
+            
           }
           
           console.log(dadosBoletos);
@@ -57,7 +58,7 @@ function ConsultaBoleto() {
 
   useEffect(() => {
 
-    consultaPagamentoBoleto(pedido, empresa);
+    consultaPagamentoBoletoLote(pedido, empresa);
 
   }, []);
 
@@ -75,11 +76,8 @@ function ConsultaBoleto() {
            <div className='containerInterno'>
                 <h2 className="titulo">Informações do boleto</h2>
 
-                <p> <span className="label">Id único:</span> {dadosBoletos[0].id_unico} </p>
-                <p> <span className="label">Pagador:</span> {dadosBoletos[0].pagador} </p>
-                <p> <span className="label">Status:</span> {dadosBoletos[0].registro_sistema_bancario} </p>
-                <p> <span className="label">Boleto:</span> <a href={""+ dadosBoletos[0].link + ""}> {dadosBoletos[0].link} </a> </p>
-                <p> <span className="label">Mais informações:</span> <a href={""+ dadosBoletos[0].link_info + ""}> {dadosBoletos[0].link_info} </a> </p>
+                <p> <span className="label">Status:</span> {dadosBoletos.status} </p>
+                <p> <span className="label">Boleto:</span> <a href={""+ dadosBoletos.linkBoleto + ""}> {dadosBoletos.linkBoleto} </a> </p>
                 <div className="containerImagem">
                     <img src={Sucesso} className="imagem" />
                 </div>
@@ -102,4 +100,4 @@ function ConsultaBoleto() {
   );
 }
 
-export default ConsultaBoleto;
+export default ConsultaBoletoLote;

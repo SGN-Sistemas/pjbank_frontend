@@ -51,8 +51,6 @@ function InvalidarBoleto() {
   return (
     <div className="App">
 
-      {loading && <Loading mensagem="Inválidando boleto" />}
-
       {
         loading &&
         <DoubleBubble width={"150px"} height={"150px"}></DoubleBubble>
@@ -61,11 +59,14 @@ function InvalidarBoleto() {
       {
         dadosBoletos &&
         <div className="container">
-            <h2 className="titulo">Informações do boleto</h2>
 
-            <p> <span className="label">Mensagem:</span> {dadosBoletos.msg} </p>
-            <p> <span className="label">Status:</span> {dadosBoletos.status} </p>
-   
+            <div className='containerInterno'>
+                
+                <h2 className="titulo">Informações do boleto</h2>
+
+                <p> <span className="label">Mensagem:</span> {dadosBoletos.msg} </p>
+                <p> <span className="label">Status:</span> {dadosBoletos.status} </p>
+            </div>
         </div>
       }
 

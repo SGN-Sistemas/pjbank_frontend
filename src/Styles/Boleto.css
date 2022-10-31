@@ -1,6 +1,8 @@
 .container{
     background-color: beige;
     padding: 10px;
+    width: '100%';
+    height: calc(100vh - 20px);
 }
 
 .titulo{
@@ -9,4 +11,21 @@
 
 .label{
     font-weight: bold;
+}
+
+.imagem{
+    width: 150px;
+    height: 150px;
+}
+
+.containerInterno{
+    background-color: #BDB76B;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+.containerImagem{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -4,6 +4,8 @@
   justify-content: center;
   align-items: center;
   background-color: beige;
+  width: '100%';
+  height: calc(100vh - 20px);
   padding: 10px;
 }
 
@@ -52,4 +54,28 @@
 
 .listaBoletos{
   display: block;
+}
+
+.imagem{
+  width: 150px;
+  height: 150px;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.containerInterno{
+  background-color: #BDB76B;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.containerImagem{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

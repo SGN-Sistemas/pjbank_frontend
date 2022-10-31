@@ -7,6 +7,8 @@ import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { BarLoader, DoubleBubble, SlidingPebbles, DoubleOrbit } from 'react-spinner-animated';
 import 'react-spinner-animated/dist/index.css';
+import Sucesso from './img/sucesso.webp';
+import Falha from './img/falha.webp';
 
 function App() {
 
@@ -14,6 +16,7 @@ function App() {
 
   const [boletos, setBoletos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [emissaoSucesso, setEmissaoSucesso] = useState(false);
   const [emitidos, setEmitidos] = useState(false);
 
   let params = useParams();
@@ -40,8 +43,13 @@ function App() {
           setEmitidos(true);
         }
 
-        if (response.data.boleto)
-          setBoletos([...response.data.boleto]);
+        console.log(response.data)
+      
+        if (response.data.boleto){
+            setBoletos([...response.data.boleto]);
+            setEmissaoSucesso(true);
+        }
+          
 
           setLoading(false);
 
@@ -64,8 +72,6 @@ function App() {
   return (
     <div className="App">
 
-      {loading && <Loading mensagem="Gerando boletos" />}
-
       {
         !loading && 
         <div>
@@ -73,14 +79,19 @@ function App() {
         </div>
       }
 
-      <ul className='listaBoletos'>
-        {boletos.map((boleto) =>
+        <ul className='listaBoletos'>
+          {boletos.map((boleto) =>
+              
+                <li key={boleto.id} > <span className='label'> Boleto {boleto.id}: </span> <a href={"" + boleto.link + ""}> {boleto.link} </a> </li>
+          )}
 
-          <li key={boleto.id} > <span className='label'> Boleto {boleto.id}: </span> <a href={"" + boleto.link + ""}> {boleto.link} </a> </li>
-
-        )}
-
-      </ul>
+            {
+              emissaoSucesso &&
+              <div className="containerImagem" style={{marginTop: 10}}>
+                    <img src={Sucesso} className="imagem" />
+              </div> 
+            }
+        </ul>
 
       {
         loading &&
@@ -88,7 +99,17 @@ function App() {
       }
 
       {
-        emitidos ? <div><h2>Existem parcelas que já foram emitidas!</h2></div> : ''
+        emitidos &&
+        <div className='container'>
+          <div className='containerInterno'>
+              <h2>Existem parcelas que já foram emitidas!</h2>
+              <div className="containerImagem">
+                <img className="imagem" src={Falha} />
+              </div>
+          </div>
+        </div> 
+  
+       
       }
 
     </div>
