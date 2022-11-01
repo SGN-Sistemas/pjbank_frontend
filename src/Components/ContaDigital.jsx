@@ -39,9 +39,6 @@ function ContaDigital() {
             console.log(conta);
           }
 
-            
-          
-          
           setLoading(false);
 
       })

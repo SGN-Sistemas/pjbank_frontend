@@ -9,7 +9,7 @@ import '../Styles/Boleto.css';
 import Falha from '../img/falha.webp';
 import Sucesso from '../img/sucesso.webp';
 
-function ConsultaBoletoLote() {
+function ConsultaBoletoFiltro() {
 
   const [loading, setLoading] = useState(true);
   const [msgVazio, setMsgVazio] = useState(false);
@@ -19,13 +19,15 @@ function ConsultaBoletoLote() {
   let params = useParams();
 
   let empresa = params.empresa;
-  let pedido = params.pedido;
+  let data_inicio = params.data_inicio;
+  let data_fim = params.data_fim;
+  let pago = params.pago;
 
-  const consultaPagamentoBoletoLote = (pedido, empresa) => {
+  const consultaPagamentoBoleto = (data_inicio, data_fim, pago, empresa) => {
 
     var config = {
       method: 'GET',
-      url: `http://localhost:7000/boleto/lote?pedido=${pedido}&empresa=${empresa}`
+      url: `http://localhost:7000/boleto/filtros?data_inicio=${data_inicio}&data_fim=${data_fim}&pago=${pago}&empresa=${empresa}`
     };
 
     axios(config)
@@ -33,17 +35,17 @@ function ConsultaBoletoLote() {
 
           console.log(response.data)
 
-          if(response.data.erro){
-
-            setMsgVazio(true);
-            setMsgErro(response.data.erro);
-
-          }else{
+          if(response.data.length > 0){
 
             setDadosBoletos(response.data);
 
-          }
+          }else{
 
+            setMsgVazio(true);
+            setMsgErro(response.data.erro);
+          }
+          
+          console.log(dadosBoletos);
           setLoading(false);
 
       })
@@ -56,7 +58,7 @@ function ConsultaBoletoLote() {
 
   useEffect(() => {
 
-    consultaPagamentoBoletoLote(pedido, empresa);
+    consultaPagamentoBoleto(data_inicio, data_fim, pago, empresa);
 
   }, []);
 
@@ -71,14 +73,23 @@ function ConsultaBoletoLote() {
       {
         dadosBoletos &&
         <div className="container">
-           <div className='containerInterno'>
+           <div className='containerInternoParcela'>
                 <h2 className="titulo">Informações do boleto</h2>
 
-                <p> <span className="label">Status:</span> {dadosBoletos.status} </p>
-                <p> <span className="label">Boleto:</span> <a href={""+ dadosBoletos.linkBoleto + ""}> {dadosBoletos.linkBoleto} </a> </p>
-                <div className="containerImagem">
-                    <img src={Sucesso} className="imagem" />
-                </div>
+                {dadosBoletos.map(parcela => 
+                    <div key={parcela.id_unico} className="containerParcela">
+                        <p> <span className="label">Id único:</span> {parcela.id_unico} </p>
+                        <p> <span className="label">Pagador:</span> {parcela.pagador} </p>
+                        <p> <span className="label">Vencimento:</span> {parcela.data_vencimento} </p>
+                        <p> <span className="label">Status:</span> {parcela.registro_sistema_bancario} </p>
+                        <p> <span className="label">Grupo de boletos:</span> <a href={""+ parcela.linkGrupo + ""}> {parcela.linkGrupo} </a> </p>
+                        <div className="containerImagem">
+                            <img src={Sucesso} className="imagem" />
+                        </div>
+
+                    </div>
+                )}
+
            </div>
         </div>
         
@@ -98,4 +109,4 @@ function ConsultaBoletoLote() {
   );
 }
 
-export default ConsultaBoletoLote;
+export default ConsultaBoletoFiltro;

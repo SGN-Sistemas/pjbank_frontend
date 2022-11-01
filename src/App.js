@@ -21,7 +21,7 @@ function App() {
 
   let params = useParams();
 
-  let parc = params.parcelas.split(',');
+  let parc = params.parcelas.split('-');
 
   let parc_int = parc.map((item) => parseInt(item));
 
@@ -72,26 +72,27 @@ function App() {
   return (
     <div className="App">
 
-      {
-        !loading && 
-        <div>
-            <h2>Boletos gerados</h2>
-        </div>
-      }
-
-        <ul className='listaBoletos'>
-          {boletos.map((boleto) =>
+          {
+          
+          (boletos && !loading && !emitidos)
+          &&
+          <div className="containerInterno"> <h2 className="titulo">Boletos gerados</h2>
+          <ul className='listaBoletos'>
+          {boletos.map((boleto) => 
               
                 <li key={boleto.id} > <span className='label'> Boleto {boleto.id}: </span> <a href={"" + boleto.link + ""}> {boleto.link} </a> </li>
           )}
+          </ul>
+           </div>
+          }
 
-            {
+          {
               emissaoSucesso &&
               <div className="containerImagem" style={{marginTop: 10}}>
                     <img src={Sucesso} className="imagem" />
               </div> 
-            }
-        </ul>
+          }
+        
 
       {
         loading &&
@@ -109,7 +110,6 @@ function App() {
           </div>
         </div> 
   
-       
       }
 
     </div>

@@ -6,12 +6,15 @@ import { useParams } from "react-router-dom";
 import {DoubleBubble} from 'react-spinner-animated';
 import 'react-spinner-animated/dist/index.css';
 import '../Styles/Boleto.css';
+import Falha from '../img/falha.webp';
+import Sucesso from '../img/sucesso.webp';
 
 function InvalidarBoleto() {
 
   const [loading, setLoading] = useState(true);
   const [emitidos, setEmitidos] = useState(false);
   const [dadosBoletos, setDadosBoletos] = useState(null);
+  const [erro, setErro] = useState(false);
 
   let params = useParams();
 
@@ -31,6 +34,10 @@ function InvalidarBoleto() {
           console.log(response.data)
           setDadosBoletos(response.data);
           console.log(dadosBoletos);
+
+          if(response.data.status == "404"){
+            setErro(true);
+          }
 
           setLoading(false);
 
@@ -61,11 +68,22 @@ function InvalidarBoleto() {
         <div className="container">
 
             <div className='containerInterno'>
-                
+
                 <h2 className="titulo">Informações do boleto</h2>
 
                 <p> <span className="label">Mensagem:</span> {dadosBoletos.msg} </p>
                 <p> <span className="label">Status:</span> {dadosBoletos.status} </p>
+
+                {
+                    (erro) ?
+                    <div className="containerImagem">
+                        <img src={Falha} className="imagem" />
+                    </div>
+                    :
+                    <div className="containerImagem">
+                        <img src={Sucesso} className="imagem" />
+                    </div>
+                }
             </div>
         </div>
       }
