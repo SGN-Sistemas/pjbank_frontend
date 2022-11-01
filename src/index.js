@@ -15,6 +15,8 @@ import ContaDigital from './Components/ContaDigital';
 import ConsultaBoletoLote from './Components/ConsultaBoletoLote';
 import CriarContaDigital from './Components/CriarContaDigital';
 import ConsultaBoletoFiltro from './Components/ConsultaBoletoFiltro';
+import ConsultaBoletoPagamentoFiltro from './Components/ConsultaBoletoPagamentoFiltro';
+import PagamentoPix from './Components/PagamentoPix';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -28,6 +30,8 @@ root.render(
               <Route path="conta_pjbank/criar_conta/empresa/:empresa" element={<CriarContaDigital />} exact > </Route>
               <Route path="boleto/lote/:pedido/empresa/:empresa" element={<ConsultaBoletoLote />} exact > </Route>
               <Route path="boleto/filtros/data_inicio/:data_inicio/data_fim/:data_fim/pago/:pago/empresa/:empresa" element={<ConsultaBoletoFiltro />} exact > </Route>
+              <Route path="boleto/pagamentos/filtros/data_inicio/:data_inicio/data_fim/:data_fim/status/:status/empresa/:empresa" element={<ConsultaBoletoPagamentoFiltro />} exact > </Route>
+              <Route path="pagamento/pix/empresa/:empresa/nome_favorecido/:nome_favorecido/cnpj_favorecido/:cnpj/valor/:valor/vencimento/:vencimento/data_pagamento/:pagamento" element={<PagamentoPix />} exact > </Route>
         </Routes>
      </BrowserRouter>
   

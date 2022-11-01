@@ -23,7 +23,7 @@ function ConsultaBoletoFiltro() {
   let data_fim = params.data_fim;
   let pago = params.pago;
 
-  const consultaPagamentoBoleto = (data_inicio, data_fim, pago, empresa) => {
+  const consultaRecebimentoBoleto = (data_inicio, data_fim, pago, empresa) => {
 
     var config = {
       method: 'GET',
@@ -58,7 +58,7 @@ function ConsultaBoletoFiltro() {
 
   useEffect(() => {
 
-    consultaPagamentoBoleto(data_inicio, data_fim, pago, empresa);
+    consultaRecebimentoBoleto(data_inicio, data_fim, pago, empresa);
 
   }, []);
 
@@ -74,15 +74,33 @@ function ConsultaBoletoFiltro() {
         dadosBoletos &&
         <div className="container">
            <div className='containerInternoParcela'>
+            
                 <h2 className="titulo">Informações do boleto</h2>
 
                 {dadosBoletos.map(parcela => 
                     <div key={parcela.id_unico} className="containerParcela">
-                        <p> <span className="label">Id único:</span> {parcela.id_unico} </p>
-                        <p> <span className="label">Pagador:</span> {parcela.pagador} </p>
-                        <p> <span className="label">Vencimento:</span> {parcela.data_vencimento} </p>
-                        <p> <span className="label">Status:</span> {parcela.registro_sistema_bancario} </p>
-                        <p> <span className="label">Grupo de boletos:</span> <a href={""+ parcela.linkGrupo + ""}> {parcela.linkGrupo} </a> </p>
+                        <div class="areaCard">
+                              <p> <span className="label">Id único:</span> {parcela.id_unico} </p>
+                              <p> <span className="label">Número do pedido:</span> {parcela.pedido_numero} </p>
+                              <p> <span className="label">Pagador:</span> {parcela.pagador} </p>
+                        </div>
+                        <div class="areaCard">
+                              <p> <span className="label">Vencimento:</span> {parcela.data_vencimento ? parcela.data_vencimento : 'XX/XX/XXXX'} </p>
+                              <p> <span className="label">Data do pagamento:</span> {parcela.data_pagamento ? parcela.data_pagamento : 'XX/XX/XXXX'} </p>
+                              <p> <span className="label">Data de crédito:</span> {parcela.data_credito ? parcela.data_credito : 'XX/XX/XXXX'} </p>
+                        </div>
+
+                        <div class="areaCard">
+                              <p> <span className="label">Valor:</span> {parcela.valor ? parcela.valor : 0.0} </p>
+                              <p> <span className="label">Valor Pago:</span> {parcela.valor_pago ? parcela.valor_pago : 0.0} </p>
+                              <p> <span className="label">Valor liquido:</span> {parcela.valor_liquido ? parcela.valor_liquido : 0.0}</p>
+                              <p> <span className="label">Status:</span> {parcela.registro_sistema_bancario} </p>
+                        </div>
+                        
+                        <div class="areaCard">
+                              <p> <span className="label">Grupo de boletos:</span> <a href={""+ parcela.linkGrupo + ""}> {parcela.linkGrupo} </a> </p>
+                        </div>
+                      
                         <div className="containerImagem">
                             <img src={Sucesso} className="imagem" />
                         </div>

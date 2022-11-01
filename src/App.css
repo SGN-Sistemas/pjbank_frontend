@@ -66,6 +66,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 80px;
 }
 
 .containerInterno{
@@ -84,6 +85,7 @@
   margin: 20px !important;
   padding: 20px !important;
   background-color: #BDB76B;
+  max-width: '90%';
   border-radius: 20px;
 }
 
@@ -91,4 +93,13 @@
   padding: 20px;
   border-radius: 10px;
   margin-top: 60px;
+}
+
+.areaCard{
+  display: flex;
+  justify-content: space-around;
+}
+
+.titulo{
+  margin-top: 80px !important;
 }
