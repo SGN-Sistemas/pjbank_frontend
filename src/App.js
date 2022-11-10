@@ -3,12 +3,13 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import './App.css';
 import Loading from './Loading/Loading'
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import { BarLoader, DoubleBubble, SlidingPebbles, DoubleOrbit } from 'react-spinner-animated';
 import 'react-spinner-animated/dist/index.css';
 import Sucesso from './img/sucesso.webp';
 import Falha from './img/falha.webp';
+
 
 function App() {
 
@@ -18,14 +19,29 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [emissaoSucesso, setEmissaoSucesso] = useState(false);
   const [emitidos, setEmitidos] = useState(false);
+  const [erros, setErros] = useState(false);
 
   let params = useParams();
 
+  let [queryString] = useSearchParams();
+
+  console.log(queryString.get('nomeArq'))
+  console.log(queryString.get('tr'))
+
+  let nomeArq = queryString.get('nomeArq');
+  let tr = queryString.get('tr');
+
+  let caminho_arq = (queryString.get('path')) ? queryString.get('path').replaceAll('-', '/') : queryString.get('path');
+
+    console.log(caminho_arq);
+
   let parc = params.parcelas.split('-');
+
+  console.log(parc)
 
   let parc_int = parc.map((item) => parseInt(item));
 
-  const dados = { parcelas: parc_int, cliente_cod: params.id, empresa_cod: params.empresa_id };
+  const dados = { parcelas: parc_int, cliente_cod: params.id, empresa_cod: params.empresa_id, email: params.email, nome_arq: nomeArq, tr: tr, caminho_arq: caminho_arq};
 
   const gerarBoleto = () => {
 
@@ -38,18 +54,18 @@ function App() {
     axios(config)
       .then(function (response) {
 
-        console.log(response.data)
+        console.log(response.data);
+
         if (response.data == 'Existem parcelas que já foram emitidas!') {
           setEmitidos(true);
         }
 
-        console.log(response.data)
-      
         if (response.data.boleto){
             setBoletos([...response.data.boleto]);
             setEmissaoSucesso(true);
+        }else{
+            setErros(true);
         }
-          
 
           setLoading(false);
 
@@ -74,7 +90,7 @@ function App() {
 
           {
           
-          (boletos && !loading && !emitidos)
+          (boletos && !loading && !emitidos && !erros)
           &&
           <div className="containerInterno"> <h2 className="titulo">Boletos gerados</h2>
           <ul className='listaBoletos'>

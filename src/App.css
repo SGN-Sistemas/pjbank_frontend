@@ -73,6 +73,8 @@
   background-color: #BDB76B;
   padding: 20px;
   border-radius: 10px;
+  -webkit-box-shadow: 4px -2px 15px -4px #000000; 
+  box-shadow: 4px -2px 15px -4px #000000;
 }
 
 .containerImagem{
@@ -87,6 +89,8 @@
   background-color: #BDB76B;
   max-width: '90%';
   border-radius: 20px;
+  -webkit-box-shadow: 4px -2px 15px -4px #000000; 
+  box-shadow: 4px -2px 15px -4px #000000;
 }
 
 .containerInternoParcela{

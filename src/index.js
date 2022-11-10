@@ -23,7 +23,7 @@ root.render(
   
      <BrowserRouter>
           <Routes>
-              <Route path="boletos/parcelas/:parcelas/" element={<App />} exact > </Route>
+              <Route path="boletos/parcelas/:parcelas/email/:email/" element={<App />} exact > </Route>
               <Route path="boletos/:pedido_numero/empresa/:empresa" element={<ConsultaBoleto />} exact > </Route>
               <Route path="boletos/invalidar/:pedido_numero/empresa/:empresa" element={<InvalidarBoleto />} exact > </Route>
               <Route path="conta_pjbank/empresa/:empresa" element={<ContaDigital />} exact > </Route>
