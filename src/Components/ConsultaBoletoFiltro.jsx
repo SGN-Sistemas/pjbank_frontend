@@ -27,7 +27,7 @@ function ConsultaBoletoFiltro() {
 
     var config = {
       method: 'GET',
-      url: `http://localhost:7000/boleto/filtros?data_inicio=${data_inicio}&data_fim=${data_fim}&pago=${pago}&empresa=${empresa}`
+      url: `http://sgnsistemas.ddns.net:5988/boleto/filtros?data_inicio=${data_inicio}&data_fim=${data_fim}&pago=${pago}&empresa=${empresa}`
     };
 
     axios(config)

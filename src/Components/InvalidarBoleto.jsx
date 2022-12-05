@@ -25,7 +25,7 @@ function InvalidarBoleto() {
 
     var config = {
       method: 'DELETE',
-      url: `http://localhost:7000/boleto?pedido=${pedido}&empresa=${empresa}`
+      url: `http://sgnsistemas.ddns.net:5988/boleto?pedido=${pedido}&empresa=${empresa}`
     };
 
     axios(config)

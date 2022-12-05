@@ -25,7 +25,7 @@ function ConsultaBoletoLote() {
 
     var config = {
       method: 'GET',
-      url: `http://localhost:7000/boleto/lote?pedido=${pedido}&empresa=${empresa}`
+      url: `http://sgnsistemas.ddns.net:5988/boleto/lote?pedido=${pedido}&empresa=${empresa}`
     };
 
     axios(config)

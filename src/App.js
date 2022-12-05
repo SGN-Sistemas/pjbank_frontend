@@ -10,7 +10,6 @@ import 'react-spinner-animated/dist/index.css';
 import Sucesso from './img/sucesso.webp';
 import Falha from './img/falha.webp';
 
-
 function App() {
 
   const bol = [{ id: 1, link: 'link1' }, { id: 2, link: 'link2' }];
@@ -20,6 +19,7 @@ function App() {
   const [emissaoSucesso, setEmissaoSucesso] = useState(false);
   const [emitidos, setEmitidos] = useState(false);
   const [erros, setErros] = useState(false);
+  const [msgErro, setMsgErro] = useState('');
 
   let params = useParams();
 
@@ -47,7 +47,7 @@ function App() {
 
     var config = {
       method: 'post',
-      url: 'http://localhost:7000/boleto',
+      url: 'http://sgnsistemas.ddns.net:5988/boleto',
       data: dados
     };
 
@@ -56,25 +56,26 @@ function App() {
 
         console.log(response.data);
 
-        if (response.data == 'Existem parcelas que já foram emitidas!') {
-          setEmitidos(true);
-        }
+        if(response.data){
 
-        if (response.data.boleto){
-            setBoletos([...response.data.boleto]);
-            setEmissaoSucesso(true);
-        }else{
-            setErros(true);
+            if (response.data.boleto){
+                setBoletos([...response.data.boleto]);
+                setEmissaoSucesso(true);
+            }else{
+                setErros(true);
+            }
+
         }
 
           setLoading(false);
-
-          console.log(boletos);
 
       })
       .catch(function (error) {
         console.log("Problema ao tentar gerar os boletos!\n");
         console.log(error);
+        setErros(true);
+        setMsgErro(error.response.data.message);
+        setLoading(false);
       });
   }
 
@@ -116,10 +117,10 @@ function App() {
       }
 
       {
-        emitidos &&
+        erros &&
         <div className='container'>
           <div className='containerInterno'>
-              <h2>Existem parcelas que já foram emitidas!</h2>
+              <h2>{msgErro}</h2>
               <div className="containerImagem">
                 <img className="imagem" src={Falha} />
               </div>

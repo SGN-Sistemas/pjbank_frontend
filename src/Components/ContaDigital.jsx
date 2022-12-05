@@ -24,7 +24,7 @@ function ContaDigital() {
 
     var config = {
       method: 'GET',
-      url: `http://localhost:7000/conta?empresa=${empresa}`
+      url: `http://sgnsistemas.ddns.net:5988/conta?empresa=${empresa}`
     };
 
     axios(config)

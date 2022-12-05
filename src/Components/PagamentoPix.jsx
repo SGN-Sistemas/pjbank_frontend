@@ -38,7 +38,7 @@ function PagamentoPix() {
 
     var config = {
       method: 'POST',
-      url: `http://localhost:7000/pix/pagamento`,
+      url: `http://sgnsistemas.ddns.net:5988/pix/pagamento`,
       data: info
     };
 

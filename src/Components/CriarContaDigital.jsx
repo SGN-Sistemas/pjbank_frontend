@@ -24,7 +24,7 @@ function CriarContaDigital() {
 
     var config = {
       method: 'POST',
-      url: `http://localhost:7000/conta?empresa=${empresa_cod}`
+      url: `http://sgnsistemas.ddns.net:5988/conta?empresa=${empresa_cod}`
     };
 
     axios(config)

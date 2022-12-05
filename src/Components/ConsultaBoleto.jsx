@@ -25,7 +25,7 @@ function ConsultaBoleto() {
 
     var config = {
       method: 'GET',
-      url: `http://localhost:7000/boleto?pedido=${pedido}&empresa=${empresa}`
+      url: `http://sgnsistemas.ddns.net:5988/boleto?pedido=${pedido}&empresa=${empresa}`
     };
 
     axios(config)
@@ -33,24 +33,25 @@ function ConsultaBoleto() {
 
           console.log(response.data)
 
-          if(response.data.length > 0){
+            if(response.data.length > 0){
 
-            setDadosBoletos(response.data);
-
-          }else{
-
-            setMsgVazio(true);
-            setMsgErro(response.data.erro);
-          }
-          
-          console.log(dadosBoletos);
+              setDadosBoletos(response.data);
+            
+            }else{
+  
+              setMsgVazio(true);
+              setMsgErro(response.data.erro);
+            }
 
           setLoading(false);
 
       })
       .catch(function (error) {
-        console.log("Problema ao tentar consultar os boletos!\n");
-        console.log(error);
+          console.log("Problema ao tentar consultar os boletos!\n");
+          console.log(error.response.data.message);
+          setMsgVazio(true);
+          setMsgErro(error.response.data.message);
+          setLoading(false);
       });
 
   }
