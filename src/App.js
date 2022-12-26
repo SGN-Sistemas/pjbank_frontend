@@ -2,10 +2,8 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import './App.css';
-import Loading from './Loading/Loading'
 import { useParams, useSearchParams } from "react-router-dom";
-import { motion } from "framer-motion";
-import { BarLoader, DoubleBubble, SlidingPebbles, DoubleOrbit } from 'react-spinner-animated';
+import { DoubleBubble} from 'react-spinner-animated';
 import 'react-spinner-animated/dist/index.css';
 import Sucesso from './img/sucesso.webp';
 import Falha from './img/falha.webp';
@@ -41,18 +39,21 @@ function App() {
 
   let parc_int = parc.map((item) => parseInt(item));
 
-  const dados = { parcelas: parc_int, cliente_cod: params.id, empresa_cod: params.empresa_id, email: params.email, nome_arq: nomeArq, tr: tr, caminho_arq: caminho_arq};
+  // const dados = { parcelas: parc_int, cliente_cod: params.id, empresa_cod: params.empresa_id, email: params.email, nome_arq: nomeArq, tr: tr, caminho_arq: caminho_arq};
 
+  const dados = { parcelas: parc_int, email: params.email, nome_arq: nomeArq, tr: tr, caminho_arq: caminho_arq};
   const gerarBoleto = () => {
 
     var config = {
       method: 'post',
-      url: 'http://sgnsistemas.ddns.net:5988/boleto',
+      url: 'http://localhost:9000/boleto',
       data: dados
     };
 
     axios(config)
       .then(function (response) {
+
+        setLoading(false);
 
         console.log(response.data);
 
@@ -67,16 +68,15 @@ function App() {
 
         }
 
-          setLoading(false);
-
       })
       .catch(function (error) {
+        setLoading(false);
         console.log("Problema ao tentar gerar os boletos!\n");
         console.log(error);
         setErros(true);
         setMsgErro(error.response.data.message);
-        setLoading(false);
-      });
+        
+      })
   }
 
 
@@ -130,7 +130,7 @@ function App() {
       }
 
     </div>
-  );
+  )
 }
 
 export default App;

@@ -1,7 +1,6 @@
 
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Loading from '../Loading/Loading';
 import { useParams } from "react-router-dom";
 import {DoubleBubble} from 'react-spinner-animated';
 import 'react-spinner-animated/dist/index.css';
@@ -25,11 +24,13 @@ function ConsultaBoleto() {
 
     var config = {
       method: 'GET',
-      url: `http://sgnsistemas.ddns.net:5988/boleto?pedido=${pedido}&empresa=${empresa}`
+      url: `http://localhost:9000/boleto?pedido=${pedido}&empresa=${empresa}`
     };
 
     axios(config)
       .then(function (response) {
+
+        
 
           console.log(response.data)
 
@@ -43,16 +44,16 @@ function ConsultaBoleto() {
               setMsgErro(response.data.erro);
             }
 
-          setLoading(false);
-
+            setLoading(false);
       })
       .catch(function (error) {
+         
           console.log("Problema ao tentar consultar os boletos!\n");
           console.log(error.response.data.message);
           setMsgVazio(true);
           setMsgErro(error.response.data.message);
           setLoading(false);
-      });
+      })
 
   }
 
@@ -100,7 +101,7 @@ function ConsultaBoleto() {
       }
 
     </div>
-  );
+  )
 }
 
 export default ConsultaBoleto;

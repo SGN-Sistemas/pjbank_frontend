@@ -1,7 +1,6 @@
 
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Loading from '../Loading/Loading';
 import { useParams } from "react-router-dom";
 import {DoubleBubble} from 'react-spinner-animated';
 import 'react-spinner-animated/dist/index.css';
@@ -25,7 +24,7 @@ function ConsultaBoletoLote() {
 
     var config = {
       method: 'GET',
-      url: `http://sgnsistemas.ddns.net:5988/boleto/lote?pedido=${pedido}&empresa=${empresa}`
+      url: `http://localhost:9000/boleto/lote?pedido=${pedido}&empresa=${empresa}`
     };
 
     axios(config)

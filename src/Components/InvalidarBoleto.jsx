@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Loading from '../Loading/Loading';
+import Loading from '../Loading/Loading.jsx';
 import { useParams } from "react-router-dom";
 import {DoubleBubble} from 'react-spinner-animated';
 import 'react-spinner-animated/dist/index.css';

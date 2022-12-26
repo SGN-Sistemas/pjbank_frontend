@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Loading from '../Loading/Loading';
+import Loading from '../Loading/Loading.jsx';
 import { useParams } from "react-router-dom";
 import {DoubleBubble} from 'react-spinner-animated';
 import 'react-spinner-animated/dist/index.css';
@@ -24,27 +24,27 @@ function ContaDigital() {
 
     var config = {
       method: 'GET',
-      url: `http://sgnsistemas.ddns.net:5988/conta?empresa=${empresa}`
+      url: `http://localhost:9000/conta?empresa=${empresa}`
     };
 
     axios(config)
       .then(function (response) {
-
-          if(response.data.erro){
-             setErro(true);
-             setMsgErro(response.data.erro);
-          }else{
-            console.log(response.data);
-            setConta(response.data);
-            console.log(conta);
-          }
-
+    
+          console.log(response.data);
+     
+          setConta(response.data);
+          setErro(false)
+   
           setLoading(false);
 
       })
       .catch(function (error) {
+        console.log( 'entrou no catch')
         console.log("Problema ao tentar consultar os dados da conta!\n");
-        console.log(error);
+        setLoading(false);
+        setErro(true);
+        setMsgErro(error.response.data.message);
+        console.log(error.response.data);
       });
 
   }
@@ -93,7 +93,7 @@ function ContaDigital() {
       {
         erro &&
         <div className="container">
-
+            <p>{erro}</p>
             <h3>{msgErro}</h3>
             <img src={Falha} className="imagem"/>
         </div>

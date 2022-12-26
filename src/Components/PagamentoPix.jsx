@@ -1,7 +1,6 @@
 
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Loading from '../Loading/Loading';
 import { useParams } from "react-router-dom";
 import {DoubleBubble} from 'react-spinner-animated';
 import 'react-spinner-animated/dist/index.css';
@@ -67,7 +66,10 @@ function PagamentoPix() {
       .catch(function (error) {
         console.log("Problema ao tentar consultar os boletos!\n");
         console.log(error);
-      });
+        setLoading(false);
+        setMsgVazio(true);
+        setMsgErro(error.response.data.message);
+      })
 
   }
 
@@ -114,7 +116,7 @@ function PagamentoPix() {
       }
 
     </div>
-  );
+  )
 }
 
 export default PagamentoPix;

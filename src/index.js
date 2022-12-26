@@ -1,29 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import App from './App.js';
+import reportWebVitals from './reportWebVitals.js';
 import {
   BrowserRouter,
   Routes,
   Route
 } from "react-router-dom";
 
-import ConsultaBoleto from './Components/ConsultaBoleto';
-import InvalidarBoleto from './Components/InvalidarBoleto';
-import ContaDigital from './Components/ContaDigital';
-import ConsultaBoletoLote from './Components/ConsultaBoletoLote';
-import CriarContaDigital from './Components/CriarContaDigital';
-import ConsultaBoletoFiltro from './Components/ConsultaBoletoFiltro';
-import ConsultaBoletoPagamentoFiltro from './Components/ConsultaBoletoPagamentoFiltro';
-import PagamentoPix from './Components/PagamentoPix';
+import ConsultaBoleto from './Components/ConsultaBoleto.jsx';
+import InvalidarBoleto from './Components/InvalidarBoleto.jsx';
+import ContaDigital from './Components/ContaDigital.jsx';
+import ConsultaBoletoLote from './Components/ConsultaBoletoLote.jsx';
+import CriarContaDigital from './Components/CriarContaDigital.jsx';
+import ConsultaBoletoFiltro from './Components/ConsultaBoletoFiltro.jsx';
+import ConsultaBoletoPagamentoFiltro from './Components/ConsultaBoletoPagamentoFiltro.jsx';
+import PagamentoPix from './Components/PagamentoPix.jsx';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   
      <BrowserRouter>
           <Routes>
-              <Route path="boletos/parcelas/:parcelas/email/:email/" element={<App />} exact > </Route>
+              <Route path="boletos/parcelas/:parcelas/email/:email" element={<App />} exact > </Route>
               <Route path="boletos/:pedido_numero/empresa/:empresa" element={<ConsultaBoleto />} exact > </Route>
               <Route path="boletos/invalidar/:pedido_numero/empresa/:empresa" element={<InvalidarBoleto />} exact > </Route>
               <Route path="conta_pjbank/empresa/:empresa" element={<ContaDigital />} exact > </Route>
@@ -35,6 +35,6 @@ root.render(
         </Routes>
      </BrowserRouter>
   
-);
+)
 
 reportWebVitals();
