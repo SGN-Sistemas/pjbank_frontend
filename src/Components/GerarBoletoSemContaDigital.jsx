@@ -41,7 +41,7 @@ function GerarBoletoSemContaDigital() {
 
   // const dados = { parcelas: parc_int, cliente_cod: params.id, empresa_cod: params.empresa_id, email: params.email, nome_arq: nomeArq, tr: tr, caminho_arq: caminho_arq};
 
-  const dados = { parcelas: parc_int, email: params.email, nome_arq: nomeArq, tr: tr, caminho_arq: caminho_arq, forma: 'pix'};
+  const dados = { parcelas: parc_int, email: params.email, nome_arq: nomeArq, tr: tr, caminho_arq: caminho_arq, forma: params.form_pag};
   const gerarBoleto = () => {
 
     var config = {
