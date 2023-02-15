@@ -1,14 +1,14 @@
 
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import './App.css';
+import '../App.css';
 import { useParams, useSearchParams } from "react-router-dom";
 import { DoubleBubble} from 'react-spinner-animated';
 import 'react-spinner-animated/dist/index.css';
-import Sucesso from './img/sucesso.webp';
-import Falha from './img/falha.webp';
+import Sucesso from '../img/sucesso.webp';
+import Falha from '../img/falha.webp';
 
-function App() {
+function GerarBoletoSemContaDigital() {
 
   const bol = [{ id: 1, link: 'link1' }, { id: 2, link: 'link2' }];
 
@@ -41,12 +41,12 @@ function App() {
 
   // const dados = { parcelas: parc_int, cliente_cod: params.id, empresa_cod: params.empresa_id, email: params.email, nome_arq: nomeArq, tr: tr, caminho_arq: caminho_arq};
 
-  const dados = { parcelas: parc_int, email: params.email, nome_arq: nomeArq, tr: tr, caminho_arq: caminho_arq};
+  const dados = { parcelas: parc_int, email: params.email, nome_arq: nomeArq, tr: tr, caminho_arq: caminho_arq, forma: 'pix'};
   const gerarBoleto = () => {
 
     var config = {
       method: 'post',
-      url: `${process.env.REACT_APP_PRE_URL_API}/boleto`,
+      url: `${process.env.REACT_APP_PRE_URL_API}/boleto_recebimento`,
       data: dados
     };
 
@@ -78,7 +78,6 @@ function App() {
         
       })
   }
-
 
   useEffect(() => {
 
@@ -133,4 +132,4 @@ function App() {
   )
 }
 
-export default App;
+export default GerarBoletoSemContaDigital;

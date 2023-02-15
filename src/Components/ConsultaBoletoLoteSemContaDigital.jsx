@@ -8,7 +8,7 @@ import '../Styles/Boleto.css';
 import Falha from '../img/falha.webp';
 import Sucesso from '../img/sucesso.webp';
 
-function ConsultaBoletoLote() {
+function ConsultaBoletoLoteSemContaDigital() {
 
   const [loading, setLoading] = useState(true);
   const [msgVazio, setMsgVazio] = useState(false);
@@ -23,8 +23,8 @@ function ConsultaBoletoLote() {
   const consultaPagamentoBoletoLote = (pedido, empresa) => {
 
     var config = {
-      method: 'GET',
-      url: `${process.env.REACT_APP_PRE_URL_API}/boleto/lote?pedido=${pedido}&empresa=${empresa}`
+      method: 'POST',
+      url: `${process.env.REACT_APP_PRE_URL_API}/boleto_recebimento/lote?pedido=${pedido}&empresa=${empresa}`
     };
 
     axios(config)
@@ -47,8 +47,10 @@ function ConsultaBoletoLote() {
 
       })
       .catch(function (error) {
+
         console.log("Problema ao tentar consultar os boletos!\n");
         console.log(error);
+
       });
 
   }
@@ -88,7 +90,7 @@ function ConsultaBoletoLote() {
         <div className="container">
             <h2 className="titulo">Informações do boleto</h2>
 
-            <h4>{msgErro}   '''</h4>
+            <h4>{msgErro}+'''</h4>
             <img src={Falha} className="imagem"/>
         </div>
       }
@@ -97,4 +99,4 @@ function ConsultaBoletoLote() {
   );
 }
 
-export default ConsultaBoletoLote;
+export default ConsultaBoletoLoteSemContaDigital;

@@ -24,13 +24,11 @@ function ConsultaBoleto() {
 
     var config = {
       method: 'GET',
-      url: `http://localhost:9000/boleto?pedido=${pedido}&empresa=${empresa}`
+      url: `${process.env.REACT_APP_PRE_URL_API}/boleto?pedido=${pedido}&empresa=${empresa}`
     };
 
     axios(config)
       .then(function (response) {
-
-        
 
           console.log(response.data)
 

@@ -9,7 +9,7 @@ import '../Styles/Boleto.css';
 import Falha from '../img/falha.webp';
 import Sucesso from '../img/sucesso.webp';
 
-function ContaDigital() {
+function AddSaldoContaDigital() {
 
   const [loading, setLoading] = useState(true);
   const [conta, setConta] = useState(null);
@@ -19,39 +19,50 @@ function ContaDigital() {
   let params = useParams();
 
   let empresa = params.empresa;
+  let valor = params.valor;
 
-  const infoContaDigital = (empresa) => {
+  const addContaDigital = (empresa, valor) => {
 
     var config = {
-      method: 'GET',
-      url: `${process.env.REACT_APP_PRE_URL_API}/conta?empresa=${empresa}`
+      method: 'POST',
+      url: `${process.env.REACT_APP_PRE_URL_API}/conta/add_saldo?empresa=${empresa}&valor=${valor}`
     };
 
     axios(config)
       .then(function (response) {
-    
-          console.log(response.data);
-     
-          setConta(response.data);
-          setErro(false)
-   
-          setLoading(false);
+
+            console.log('deu certo');
+
+            if(response.data.msg){
+                setMsgErro(response.data.msg);
+                setErro(true);
+
+                console.log(response.data.msg);
+
+            }else{
+
+                setConta(response.data);
+                setErro(false)
+            }
+
+            setLoading(false);
 
       })
       .catch(function (error) {
-        console.log( 'entrou no catch')
-        console.log("Problema ao tentar consultar os dados da conta!\n");
-        setLoading(false);
-        setErro(true);
-        setMsgErro(error.response.data.message);
-        console.log(error.response.data);
+
+            console.log( 'entrou no catch')
+            console.log("Problema ao tentar consultar os dados da conta!\n");
+            setLoading(false);
+            setErro(true);
+            setMsgErro(error.response.data.message);
+            console.log(error.response.data);
       });
 
   }
 
   useEffect(() => {
 
-    infoContaDigital(empresa);
+    addContaDigital(empresa, valor);
 
   }, []);
 
@@ -71,15 +82,10 @@ function ContaDigital() {
 
                 <h2 className="titulo">Informações da conta digital PJBANK</h2>
 
-                <p> <span className="label">Empresa:</span> {conta.nome_empresa} </p>
-                <p> <span className="label">CNPJ:</span> {conta.cnpj} </p>
-                <p> <span className="label">E-mail:</span> {conta.email} </p>
-                <p> <span className="label">Agência:</span>  {conta.agencia} </p>
-                <p> <span className="label">Conta:</span>  {conta.conta} </p>
-                <p> <span className="label">Banco:</span>  {conta.banco} </p>
-                <p> <span className="label">Telefone:</span>  {conta.telefone} </p>
-                <p> <span className="label">Status:</span>  {conta.status} </p>
-                <p> <span className="label">Mensagem do status:</span>  {conta.msg_status_documentacao}  </p>
+                <p> <span className="label">Id único:</span> {conta.id_unico} </p>
+                <p> <span className="label">Boleto:</span> {conta.link_boleto} </p>
+                <p> <span className="label">E-mail:</span> {conta.linha_digitavel} </p>
+            
                 <div className="containerImagem">
                     <img src={Sucesso} className="imagem" />
                 </div>
@@ -103,4 +109,4 @@ function ContaDigital() {
   );
 }
 
-export default ContaDigital;
+export default AddSaldoContaDigital;

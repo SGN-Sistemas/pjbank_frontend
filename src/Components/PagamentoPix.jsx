@@ -37,7 +37,7 @@ function PagamentoPix() {
 
     var config = {
       method: 'POST',
-      url: `http://sgnsistemas.ddns.net:5988/pix/pagamento`,
+      url: `${process.env.REACT_APP_PRE_URL_API}/pix/pagamento`,
       data: info
     };
 
@@ -51,12 +51,16 @@ function PagamentoPix() {
                 if(response.data.status != '403')
                     setDadosPix(response.data);
     
-              }else{
+             }else{
     
                 setMsgVazio(true);
                 setMsgErro(response.data.msg);
               }
     
+          if(response.data.msg){
+            setMsgVazio(true);
+            setMsgErro(response.data.msg);
+          }
           
           console.log(dadosPix);
 
