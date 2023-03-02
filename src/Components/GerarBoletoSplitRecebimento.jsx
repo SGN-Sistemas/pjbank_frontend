@@ -8,7 +8,7 @@ import 'react-spinner-animated/dist/index.css';
 import Sucesso from '../img/sucesso.webp';
 import Falha from '../img/falha.webp';
 
-function GerarBoletoSemContaDigital() {
+function GerarBoletoSplitRecebimento() {
 
   const bol = [{ id: 1, link: 'link1' }, { id: 2, link: 'link2' }];
 
@@ -41,12 +41,12 @@ function GerarBoletoSemContaDigital() {
 
   // const dados = { parcelas: parc_int, cliente_cod: params.id, empresa_cod: params.empresa_id, email: params.email, nome_arq: nomeArq, tr: tr, caminho_arq: caminho_arq};
 
-  const dados = { parcelas: parc_int, email: params.email, nome_arq: nomeArq, tr: tr, caminho_arq: caminho_arq, forma: params.form_pag};
+  const dados = { parcelas: parc_int, email: params.email, nome_arq: nomeArq, tr: tr, caminho_arq: caminho_arq};
   const gerarBoleto = () => {
 
     var config = {
       method: 'post',
-      url: `${process.env.REACT_APP_PRE_URL_API}/boleto_recebimento`,
+      url: `${process.env.REACT_APP_PRE_URL_API}/boleto_recebimento/split`,
       data: dados
     };
 
@@ -133,4 +133,4 @@ function GerarBoletoSemContaDigital() {
   )
 }
 
-export default GerarBoletoSemContaDigital;
+export default GerarBoletoSplitRecebimento;

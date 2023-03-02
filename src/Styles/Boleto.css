@@ -57,3 +57,45 @@
   .titulo{
     margin-top: 80px !important;
   }
+
+  .formulario{
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 50%;
+  }
+
+  .labels{
+    
+    font: 20px;
+    font-weight: bold;
+  }
+
+  .inputs{
+
+    padding: 10px;
+    margin: 20px 20px 20px 0;
+    border-radius: 10px;
+    font-size: 18px;
+    width: 90%;
+    
+  }
+
+  .btn_formulario{
+    padding: 10px;
+    border-radius: 10px;
+    background-color: aquamarine;
+    cursor: pointer;
+    width: 100px;
+  }
+
+  .titulo_form{
+
+    width: 90%;
+    background-color: #d9d9d9;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px;
+  }

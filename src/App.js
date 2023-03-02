@@ -10,8 +10,6 @@ import Falha from './img/falha.webp';
 
 function App() {
 
-  const bol = [{ id: 1, link: 'link1' }, { id: 2, link: 'link2' }];
-
   const [boletos, setBoletos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [emissaoSucesso, setEmissaoSucesso] = useState(false);
@@ -64,6 +62,8 @@ function App() {
                 setEmissaoSucesso(true);
             }else{
                 setErros(true);
+                //console.log()
+                setMsgErro(response.data.msg);
             }
 
         }
