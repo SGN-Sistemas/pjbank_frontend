@@ -27,11 +27,14 @@ import ContaRecebimento from './Components/ContaRecebimento.jsx';
 import InvalidarBoletoRecebimento from './Components/InvalidarBoletoRecebimento.jsx';
 import GerarBoletoSplitRecebimento from './Components/GerarBoletoSplitRecebimento.jsx';
 
+import InfoCriptografado from './Components/InfoCriptografado.jsx';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   
      <BrowserRouter>
           <Routes>
+
               <Route path="conta_recebimento/empresa/:empresa" element={<CriarContaRecebimento />} exact > </Route>
               <Route path="boletos/parcelas/:parcelas/email/:email" element={<App />} exact > </Route>
               <Route path="boletos_recebimentos/parcelas/:parcelas/email/:email/forma_pag/:form_pag" element={<GerarBoletoSemContaDigital />} exact > </Route>
@@ -52,6 +55,9 @@ root.render(
               <Route path="boleto/filtros/data_inicio/:data_inicio/data_fim/:data_fim/pago/:pago/empresa/:empresa" element={<ConsultaBoletoFiltro />} exact > </Route>
               <Route path="boleto/pagamentos/filtros/data_inicio/:data_inicio/data_fim/:data_fim/status/:status/empresa/:empresa" element={<ConsultaBoletoPagamentoFiltro />} exact > </Route>
               <Route path="pagamento/pix/empresa/:empresa/nome_favorecido/:nome_favorecido/cnpj_favorecido/:cnpj/valor/:valor/vencimento/:vencimento/data_pagamento/:pagamento" element={<PagamentoPix />} exact > </Route>
+              
+              <Route path="conta_recebimento/:empresa/repasse_cod/:repasse_cod" element={<InfoCriptografado />} exact > </Route>
+
         </Routes>
      </BrowserRouter>
   
