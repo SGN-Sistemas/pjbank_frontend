@@ -30,10 +30,20 @@ function InfoCriptografado() {
     axios(config)
         .then(function (response) {
 
-            setLoading(false);
-  
-              console.log(response)
-              setResposta(response)
+              setLoading(false);
+              
+              if(response.data.msg){
+
+                console.log(response.data.msg)
+                setErros(true);
+                setMsgErro(response.data.msg);
+
+              }else{
+
+                console.log(response)
+                setResposta(response)
+              }
+              
   
      })
     .catch(function (error) {
