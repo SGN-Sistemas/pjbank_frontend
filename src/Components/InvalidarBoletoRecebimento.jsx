@@ -20,12 +20,13 @@ function InvalidarBoletoRecebimento() {
 
   let empresa = params.empresa;
   let pedido = params.pedido_numero;
+  let cobr_cod = params.cobr_cod;
 
   const invalidarBoletoRecebimento = (pedido, empresa) => {
 
     var config = {
       method: 'DELETE',
-      url: `${process.env.REACT_APP_PRE_URL_API}/boleto_recebimento?pedido=${pedido}&empresa=${empresa}`
+      url: `${process.env.REACT_APP_PRE_URL_API}/boleto_recebimento?pedido=${pedido}&empresa=${empresa}&cobr_cod=${cobr_cod}`
     };
 
     axios(config)

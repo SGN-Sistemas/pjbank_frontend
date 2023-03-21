@@ -43,7 +43,6 @@ function InfoCriptografado() {
                 console.log(response)
                 setResposta(response)
               }
-              
   
      })
     .catch(function (error) {

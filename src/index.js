@@ -35,29 +35,28 @@ root.render(
      <BrowserRouter>
           <Routes>
 
-              <Route path="conta_recebimento/empresa/:empresa" element={<CriarContaRecebimento />} exact > </Route>
-              <Route path="boletos/parcelas/:parcelas/email/:email" element={<App />} exact > </Route>
-              <Route path="boletos_recebimentos/parcelas/:parcelas/email/:email/forma_pag/:form_pag" element={<GerarBoletoSemContaDigital />} exact > </Route>
-              <Route path="boletos_recebimentos/split/parcelas/:parcelas/email/:email/" element={<GerarBoletoSplitRecebimento />} exact > </Route>
+              <Route path="conta_recebimento/empresa/:empresa/cobranca/:cobr_cod" element={<CriarContaRecebimento />} exact > </Route>
+              <Route path="boletos/parcelas/:parcelas/email/:email/tr/:tr/arquivo/:nomeArq" element={<App />} exact > </Route>
+              <Route path="boletos_recebimentos/parcelas/:parcelas/email/:email/tr/:tr/arquivo/:nomeArq/cobranca/:cobr_cod" element={<GerarBoletoSemContaDigital />} exact > </Route>
+              <Route path="boletos_recebimentos/split/parcelas/:parcelas/email/:email/tr/:tr/arquivo/:nomeArq/cobranca/:cobr_cod" element={<GerarBoletoSplitRecebimento />} exact > </Route>
 
               <Route path="conta_pjbank/add_saldo/empresa/:empresa/valor/:valor" element={<AddSaldoContaDigital />} exact > </Route>
               <Route path="boletos/:pedido_numero/empresa/:empresa" element={<ConsultaBoleto />} exact > </Route>
               <Route path="boletos/invalidar/:pedido_numero/empresa/:empresa" element={<InvalidarBoleto />} exact > </Route>
-              <Route path="boletos_recebimento/invalidar/:pedido_numero/empresa/:empresa" element={<InvalidarBoletoRecebimento />} exact > </Route>
+              <Route path="boletos_recebimento/invalidar/:pedido_numero/empresa/:empresa/cobranca/:cobr_cod" element={<InvalidarBoletoRecebimento />} exact > </Route>
 
               <Route path="conta_pjbank/empresa/:empresa" element={<ContaDigital />} exact > </Route>
-              <Route path="conta_recebimento/credencial/empresa/:empresa" element={<ContaRecebimento />} exact > </Route>
+              <Route path="conta_recebimento/credencial/empresa/:empresa/cobranca/:cobr_cod" element={<ContaRecebimento />} exact > </Route>
               <Route path="conta_pjbank/criar_conta/empresa/:empresa" element={<CriarContaDigital />} exact > </Route>
               <Route path="boleto/lote/:pedido/empresa/:empresa" element={<ConsultaBoletoLote />} exact > </Route>
               <Route path="boleto/carne/:pedido/empresa/:empresa" element={<ConsultaBoletoCarne />} exact > </Route>
-              <Route path="boleto_recebimento/carne/:pedido/empresa/:empresa" element={<ConsultaBoletoCarneSemContaDigital />} exact > </Route>
-              <Route path="boleto_recebimento/lote/:pedido/empresa/:empresa" element={<ConsultaBoletoLoteSemContaDigital />} exact > </Route>
+              <Route path="boleto_recebimento/carne/:pedido/empresa/:empresa/cobranca/:cobr_cod" element={<ConsultaBoletoCarneSemContaDigital />} exact > </Route>
+              <Route path="boleto_recebimento/lote/:pedido/empresa/:empresa/cobranca/:cobr_cod" element={<ConsultaBoletoLoteSemContaDigital />} exact > </Route>
               <Route path="boleto/filtros/data_inicio/:data_inicio/data_fim/:data_fim/pago/:pago/empresa/:empresa" element={<ConsultaBoletoFiltro />} exact > </Route>
               <Route path="boleto/pagamentos/filtros/data_inicio/:data_inicio/data_fim/:data_fim/status/:status/empresa/:empresa" element={<ConsultaBoletoPagamentoFiltro />} exact > </Route>
               <Route path="pagamento/pix/empresa/:empresa/nome_favorecido/:nome_favorecido/cnpj_favorecido/:cnpj/valor/:valor/vencimento/:vencimento/data_pagamento/:pagamento" element={<PagamentoPix />} exact > </Route>
               
               <Route path="conta_recebimento/:empresa/repasse_cod/:repasse_cod" element={<InfoCriptografado />} exact > </Route>
-
         </Routes>
      </BrowserRouter>
   

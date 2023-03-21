@@ -9,7 +9,7 @@ import '../Styles/Boleto.css';
 import Falha from '../img/falha.webp';
 import Sucesso from '../img/sucesso.webp';
 
-function ContaRecebimento() {
+function ContaDigital() {
 
   const [loading, setLoading] = useState(true);
   const [conta, setConta] = useState(null);
@@ -19,34 +19,24 @@ function ContaRecebimento() {
   let params = useParams();
 
   let empresa = params.empresa;
-  let cobr_cod = params.cobr_cod;
 
-  const infoContaRecebimento = (empresa) => {
+  const infoContaDigital = (empresa) => {
 
     var config = {
       method: 'GET',
-      url: `${process.env.REACT_APP_PRE_URL_API}/conta_recebimento?empresa=${empresa}&cobr_cod=${cobr_cod}`
+      url: `${process.env.REACT_APP_PRE_URL_API}/conexao?empresa=${empresa}`
     };
 
     axios(config)
       .then(function (response) {
-
-        if(response.data.erro){
-
-            setLoading(false);
-            setErro(true);
-            setMsgErro(response.data.erro.msg);
-
-        }else{
-
-            console.log(response.data);
-     
-            setConta(response.data);
-            setErro(false)
-     
-            setLoading(false);
-        }
     
+          console.log(response.data);
+     
+          setConta(response.data);
+          setErro(false)
+   
+          setLoading(false);
+
       })
       .catch(function (error) {
         console.log( 'entrou no catch')
@@ -61,7 +51,7 @@ function ContaRecebimento() {
 
   useEffect(() => {
 
-    infoContaRecebimento(empresa);
+    infoContaDigital(empresa);
 
   }, []);
 
@@ -113,4 +103,4 @@ function ContaRecebimento() {
   );
 }
 
-export default ContaRecebimento;
+export default ContaDigital;

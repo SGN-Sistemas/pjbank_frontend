@@ -21,17 +21,19 @@ function App() {
 
   let [queryString] = useSearchParams();
 
-  console.log(queryString.get('nomeArq'))
-  console.log(queryString.get('tr'))
+  // console.log(queryString.get('nomeArq'))
+  // console.log(queryString.get('tr'))
 
-  let nomeArq = queryString.get('nomeArq');
-  let tr = queryString.get('tr');
+  // let nomeArq = queryString.get('nomeArq');
+  // let tr = queryString.get('tr');
 
   let caminho_arq = (queryString.get('path')) ? queryString.get('path').replaceAll('-', '/') : queryString.get('path');
 
     console.log(caminho_arq);
 
   let parc = params.parcelas.split('-');
+  let nomeArq = params.nomeArq;
+  let tr = params.tr;
 
   console.log(parc)
 
@@ -78,7 +80,6 @@ function App() {
         
       })
   }
-
 
   useEffect(() => {
 

@@ -22,18 +22,20 @@ function GerarBoletoSemContaDigital() {
   let params = useParams();
 
   let [queryString] = useSearchParams();
+  // console.log(queryString.get('nomeArq'))
+  // console.log(queryString.get('tr'))
 
-  console.log(queryString.get('nomeArq'))
-  console.log(queryString.get('tr'))
-
-  let nomeArq = queryString.get('nomeArq');
-  let tr = queryString.get('tr');
+  // let nomeArq = queryString.get('nomeArq');
+  // let tr = queryString.get('tr');
 
   let caminho_arq = (queryString.get('path')) ? queryString.get('path').replaceAll('-', '/') : queryString.get('path');
 
     console.log(caminho_arq);
 
   let parc = params.parcelas.split('-');
+  let tr = params.tr;
+  let nomeArq = params.nomeArq;
+  let cobr_cod = params.cobr_cod;
 
   console.log(parc)
 
@@ -41,7 +43,7 @@ function GerarBoletoSemContaDigital() {
 
   // const dados = { parcelas: parc_int, cliente_cod: params.id, empresa_cod: params.empresa_id, email: params.email, nome_arq: nomeArq, tr: tr, caminho_arq: caminho_arq};
 
-  const dados = { parcelas: parc_int, email: params.email, nome_arq: nomeArq, tr: tr, caminho_arq: caminho_arq, forma: params.form_pag};
+  const dados = { parcelas: parc_int, email: params.email, nome_arq: nomeArq, tr: tr, caminho_arq: caminho_arq, cobr_cod: cobr_cod};
   const gerarBoleto = () => {
 
     var config = {
@@ -66,7 +68,6 @@ function GerarBoletoSemContaDigital() {
                 setErros(true);
                 setMsgErro(response.data.msg);
             }
-
         }
 
       })
@@ -109,8 +110,7 @@ function GerarBoletoSemContaDigital() {
                     <img src={Sucesso} className="imagem" />
               </div> 
           }
-        
-
+      
       {
         loading &&
         <DoubleBubble width={"150px"} height={"150px"}></DoubleBubble>

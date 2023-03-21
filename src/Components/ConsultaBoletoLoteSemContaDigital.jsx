@@ -19,12 +19,13 @@ function ConsultaBoletoLoteSemContaDigital() {
 
   let empresa = params.empresa;
   let pedido = params.pedido;
+  let cobr_cod = params.cobr_cod;
 
   const consultaPagamentoBoletoLote = (pedido, empresa) => {
 
     var config = {
       method: 'POST',
-      url: `${process.env.REACT_APP_PRE_URL_API}/boleto_recebimento/lote?pedido=${pedido}&empresa=${empresa}`
+      url: `${process.env.REACT_APP_PRE_URL_API}/boleto_recebimento/lote?pedido=${pedido}&empresa=${empresa}&cobr_cod=${cobr_cod}`
     };
 
     axios(config)

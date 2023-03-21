@@ -23,11 +23,15 @@ function GerarBoletoSplitRecebimento() {
 
   let [queryString] = useSearchParams();
 
-  console.log(queryString.get('nomeArq'))
-  console.log(queryString.get('tr'))
+  // console.log(queryString.get('nomeArq'))
+  // console.log(queryString.get('tr'))
 
-  let nomeArq = queryString.get('nomeArq');
-  let tr = queryString.get('tr');
+  // let nomeArq = queryString.get('nomeArq');
+  // let tr = queryString.get('tr');
+  
+  let nomeArq = params.nomeArq;
+  let tr = params.tr;
+  let cobr_cod = params.cobr_cod;
 
   let caminho_arq = (queryString.get('path')) ? queryString.get('path').replaceAll('-', '/') : queryString.get('path');
 
@@ -41,7 +45,7 @@ function GerarBoletoSplitRecebimento() {
 
   // const dados = { parcelas: parc_int, cliente_cod: params.id, empresa_cod: params.empresa_id, email: params.email, nome_arq: nomeArq, tr: tr, caminho_arq: caminho_arq};
 
-  const dados = { parcelas: parc_int, email: params.email, nome_arq: nomeArq, tr: tr, caminho_arq: caminho_arq};
+  const dados = { parcelas: parc_int, email: params.email, nome_arq: nomeArq, tr: tr, caminho_arq: caminho_arq, cobr_cod: cobr_cod};
   const gerarBoleto = () => {
 
     var config = {
